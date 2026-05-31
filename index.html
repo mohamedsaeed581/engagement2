@@ -60,6 +60,8 @@ opacity:0;pointer-events:none;
 
 .music-toggle.visible{opacity:1;pointer-events:auto}
 
+.music-toggle.ready{opacity:1;pointer-events:auto}
+
 .music-toggle:hover{
 border-color:var(--gold);
 box-shadow:0 0 20px rgba(201,168,76,.25);
@@ -409,14 +411,14 @@ opacity:1;transform:translateY(0);
 <div class="bg-layer"></div>
 
 <!-- Music Toggle -->
-<button class="music-toggle" id="musicBtn" onclick="toggleMusic()" title="Toggle music">
+<button class="music-toggle ready" id="musicBtn" onclick="toggleMusic()" title="Toggle music">
 <div class="music-bars" id="musicBars">
 <span></span><span></span><span></span>
 </div>
 </button>
 
 <audio id="music" loop preload="auto">
-<source src="assets/music.webm" type="audio/webm">
+<source src="assets/music.mp3" type="audio/mpeg">
 </audio>
 
 <!-- Hero — single landing page -->
@@ -510,21 +512,34 @@ const music = document.getElementById('music');
 const openBtn = document.getElementById('openBtn');
 const musicBtn = document.getElementById('musicBtn');
 const scrollHint = document.getElementById('scrollHint');
-music.volume = 0.4;
+music.volume = 0.5;
+
+let musicStarted = false;
+
+function playMusic(){
+if(musicStarted && !music.paused) return;
+music.play().then(()=>{
+musicStarted = true;
+musicBtn.classList.remove('paused');
+}).catch(()=>{});
+}
 
 function startExperience(){
 openBtn.classList.add('playing');
-musicBtn.classList.add('visible');
 scrollHint.classList.add('visible');
-music.play().catch(()=>{});
+playMusic();
 }
 
 openBtn.addEventListener('click', startExperience);
 
+document.querySelector('.gold-btn[href="#countdown"]').addEventListener('click', playMusic);
+
+document.addEventListener('click', ()=>{ playMusic(); }, { once:true });
+document.addEventListener('touchstart', ()=>{ playMusic(); }, { once:true });
+
 function toggleMusic(){
 if(music.paused){
-music.play();
-musicBtn.classList.remove('paused');
+playMusic();
 }else{
 music.pause();
 musicBtn.classList.add('paused');
