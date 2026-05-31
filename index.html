@@ -45,74 +45,6 @@ content:'';position:absolute;inset:0;
 background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
-/* ── WELCOME OVERLAY ── */
-.welcome{
-position:fixed;inset:0;z-index:9999;
-background:rgba(5,5,5,.97);
-display:flex;flex-direction:column;
-justify-content:center;align-items:center;
-text-align:center;padding:30px;
-transition:opacity 1.2s ease,visibility 1.2s ease;
-cursor:pointer;
-}
-
-.welcome.hidden{
-opacity:0;visibility:hidden;pointer-events:none;
-}
-
-.welcome-ornament{
-font-size:28px;color:var(--gold);opacity:.6;
-margin-bottom:30px;letter-spacing:12px;
-}
-
-.welcome h1{
-font-family:'Cinzel',serif;
-font-size:clamp(32px,6vw,58px);
-color:var(--gold);letter-spacing:6px;
-margin-bottom:12px;
-animation:fadeUp 1.2s ease both;
-}
-
-.welcome .subtitle{
-font-family:'Cormorant Garamond',serif;
-font-size:clamp(18px,3vw,26px);
-font-style:italic;color:var(--text-muted);
-margin-bottom:50px;
-animation:fadeUp 1.2s .3s ease both;
-}
-
-.welcome-btn{
-display:inline-flex;align-items:center;gap:12px;
-padding:16px 48px;
-border:1px solid var(--gold);
-color:var(--gold);
-font-family:'Cinzel',serif;
-font-size:13px;letter-spacing:4px;
-background:transparent;
-cursor:pointer;
-transition:all .4s ease;
-animation:fadeUp 1.2s .6s ease both;
-}
-
-.welcome-btn:hover{
-background:var(--gold);color:var(--dark);
-box-shadow:0 0 40px rgba(201,168,76,.35);
-}
-
-.welcome-btn svg{width:18px;height:18px;fill:currentColor}
-
-.welcome-hint{
-margin-top:30px;font-size:11px;
-letter-spacing:3px;color:var(--text-muted);
-text-transform:uppercase;
-animation:fadeUp 1.2s .9s ease both;
-}
-
-@keyframes fadeUp{
-from{opacity:0;transform:translateY(30px)}
-to{opacity:1;transform:translateY(0)}
-}
-
 /* ── MUSIC TOGGLE ── */
 .music-toggle{
 position:fixed;top:24px;right:24px;z-index:1000;
@@ -177,64 +109,17 @@ text-transform:uppercase;color:var(--text-muted);
 margin-bottom:16px;
 }
 
-/* ── OPENING ── */
-.opening{
-min-height:100vh;
-display:flex;flex-direction:column;
-justify-content:center;align-items:center;
-text-align:center;padding:40px 20px;
-position:relative;
-}
-
-.opening-date{
-font-size:12px;letter-spacing:6px;
-color:var(--text-muted);margin-bottom:40px;
-}
-
-.opening h1{
-font-family:'Cinzel',serif;
-font-size:clamp(42px,8vw,82px);
-color:var(--gold);letter-spacing:8px;
-line-height:1.1;
-}
-
-.opening .amp{
-display:block;font-family:'Cormorant Garamond',serif;
-font-size:clamp(28px,5vw,48px);
-font-style:italic;color:var(--gold-light);
-font-weight:300;margin:8px 0;
-}
-
-.opening p{
-margin-top:30px;
-font-family:'Cormorant Garamond',serif;
-font-size:clamp(18px,3vw,24px);
-font-style:italic;color:var(--text-muted);
-}
-
-.scroll-hint{
-position:absolute;bottom:40px;left:50%;
-transform:translateX(-50%);
-display:flex;flex-direction:column;align-items:center;gap:8px;
-color:var(--text-muted);font-size:10px;letter-spacing:3px;
-animation:float 2s ease infinite;
-}
-
-.scroll-hint::after{
-content:'';width:1px;height:40px;
-background:linear-gradient(to bottom,var(--gold),transparent);
-}
-
-@keyframes float{
-0%,100%{transform:translateX(-50%) translateY(0)}
-50%{transform:translateX(-50%) translateY(8px)}
-}
-
-/* ── HERO ── */
+/* ── HERO (single landing page) ── */
 .hero{
 min-height:100vh;
 display:flex;justify-content:center;align-items:center;
 padding:80px 40px;gap:40px;flex-wrap:wrap;
+position:relative;
+}
+
+.hero-date{
+font-size:12px;letter-spacing:6px;
+color:var(--text-muted);margin-bottom:20px;
 }
 
 .photo-frame{
@@ -294,17 +179,51 @@ margin-top:20px;
 }
 
 .gold-btn{
-display:inline-block;margin-top:36px;
+display:inline-block;margin-top:28px;
 padding:14px 44px;
 border:1px solid var(--gold);
 color:var(--gold);text-decoration:none;
 font-size:11px;letter-spacing:4px;
 transition:all .4s ease;
+cursor:pointer;
+font-family:'Montserrat',sans-serif;
+background:transparent;
 }
 
 .gold-btn:hover{
 background:var(--gold);color:var(--dark);
 box-shadow:0 0 30px rgba(201,168,76,.3);
+}
+
+.open-btn{
+display:inline-flex;align-items:center;gap:10px;
+margin-top:20px;
+}
+
+.open-btn svg{width:16px;height:16px;fill:currentColor}
+
+.open-btn.playing{display:none}
+
+.scroll-hint{
+position:absolute;bottom:36px;left:50%;
+transform:translateX(-50%);
+display:flex;flex-direction:column;align-items:center;gap:8px;
+color:var(--text-muted);font-size:10px;letter-spacing:3px;
+animation:float 2s ease infinite;
+opacity:0;transition:opacity .6s ease;
+pointer-events:none;
+}
+
+.scroll-hint.visible{opacity:1}
+
+.scroll-hint::after{
+content:'';width:1px;height:40px;
+background:linear-gradient(to bottom,var(--gold),transparent);
+}
+
+@keyframes float{
+0%,100%{transform:translateX(-50%) translateY(0)}
+50%{transform:translateX(-50%) translateY(8px)}
 }
 
 /* ── COUNTDOWN ── */
@@ -489,20 +408,8 @@ opacity:1;transform:translateY(0);
 
 <div class="bg-layer"></div>
 
-<!-- Welcome / Music Start -->
-<div class="welcome" id="welcome">
-<div class="welcome-ornament">✦ ✦ ✦</div>
-<h1>MOHAMED & REWAN</h1>
-<p class="subtitle">You're invited to celebrate our engagement</p>
-<button class="welcome-btn" id="openBtn">
-<svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-OPEN INVITATION
-</button>
-<p class="welcome-hint">Tap to enter with music</p>
-</div>
-
 <!-- Music Toggle -->
-<button class="music-toggle visible" id="musicBtn" onclick="toggleMusic()" title="Toggle music">
+<button class="music-toggle" id="musicBtn" onclick="toggleMusic()" title="Toggle music">
 <div class="music-bars" id="musicBars">
 <span></span><span></span><span></span>
 </div>
@@ -512,30 +419,31 @@ OPEN INVITATION
 <source src="assets/music.webm" type="audio/webm">
 </audio>
 
-<!-- Opening -->
-<section class="opening reveal">
-<p class="opening-date">JULY 17, 2026</p>
-<h1>MOHAMED<span class="amp">&</span>REWAN</h1>
-<p>Every love story has a beautiful beginning...</p>
-<div class="scroll-hint">SCROLL</div>
-</section>
-
-<!-- Hero -->
+<!-- Hero — single landing page -->
 <section class="hero">
-<div class="photo-frame reveal">
+<div class="photo-frame reveal visible">
 <img src="assets/mohamed.jpg" alt="Mohamed">
 </div>
 
-<div class="center reveal">
+<div class="center reveal visible">
+<p class="hero-date">JULY 17, 2026</p>
 <p class="section-label">Together with their families</p>
 <h1>MOHAMED<span class="amp">&</span>REWAN</h1>
 <p>Joyfully invite you to celebrate<br>their engagement</p>
+
+<button class="gold-btn open-btn" id="openBtn">
+<svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+OPEN INVITATION
+</button>
+
 <a href="#countdown" class="gold-btn">DISCOVER MORE</a>
 </div>
 
-<div class="photo-frame reveal">
+<div class="photo-frame reveal visible">
 <img src="assets/rewan.jpg" alt="Rewan">
 </div>
+
+<div class="scroll-hint" id="scrollHint">SCROLL</div>
 </section>
 
 <!-- Countdown -->
@@ -599,24 +507,19 @@ OPEN INVITATION
 <script>
 
 const music = document.getElementById('music');
-const welcome = document.getElementById('welcome');
 const openBtn = document.getElementById('openBtn');
 const musicBtn = document.getElementById('musicBtn');
+const scrollHint = document.getElementById('scrollHint');
 music.volume = 0.4;
 
 function startExperience(){
-welcome.classList.add('hidden');
+openBtn.classList.add('playing');
 musicBtn.classList.add('visible');
+scrollHint.classList.add('visible');
 music.play().catch(()=>{});
-document.body.style.overflow = '';
 }
 
-openBtn.addEventListener('click',(e)=>{
-e.stopPropagation();
-startExperience();
-});
-
-welcome.addEventListener('click', startExperience);
+openBtn.addEventListener('click', startExperience);
 
 function toggleMusic(){
 if(music.paused){
@@ -651,8 +554,6 @@ if(e.isIntersecting) e.target.classList.add('visible');
 },{threshold:0.12});
 
 reveals.forEach(el=>observer.observe(el));
-
-document.body.style.overflow = 'hidden';
 
 </script>
 
