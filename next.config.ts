@@ -3,10 +3,12 @@ import type { NextConfig } from "next";
 const isGhPages = process.env.GITHUB_PAGES === "true";
 
 const nextConfig: NextConfig = {
-  output: "export",
+  // Static export is only needed for GitHub Pages.
+  // Vercel serves the app natively via `next build` (no export).
+  ...(isGhPages ? { output: "export" as const } : {}),
   trailingSlash: true,
   images: {
-    unoptimized: true,
+    unoptimized: isGhPages,
   },
   ...(isGhPages && {
     basePath: "/engagement",
