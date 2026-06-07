@@ -74,15 +74,20 @@ NEXT_PUBLIC_GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/YOUR_SCRIPT_ID/
 1. Push repo to GitHub
 2. Import project at [vercel.com/new](https://vercel.com/new)
 3. Framework: **Next.js** (auto-detected)
-4. Add environment variable if using RSVP:
-   - `NEXT_PUBLIC_GOOGLE_SCRIPT_URL`
-5. Deploy
+4. **Build Command:** `npm run build` (do **not** use `build:gh-pages`)
+5. **Do not set** `NEXT_PUBLIC_BASE_PATH` on Vercel (that is only for GitHub Pages)
+6. Deploy
+
+Your live URL will look like:
+`https://engagement-xxxx-mohamedsaeed581s-projects.vercel.app`
+
+> **Note:** `engagement.vercel.app` belongs to a different project. Use the URL shown in your [Vercel dashboard](https://vercel.com/mohamedsaeed581s-projects/engagement).
 
 ```bash
 npm run build    # Production build (exports to /out)
 ```
 
-> Vercel runs `next build` automatically. Static export is configured in `next.config.ts`.
+> Vercel runs `next build` automatically. Static export is configured in `next.config.ts`. `vercel.json` enforces the correct build command.
 
 ## Deploy to GitHub Pages
 
