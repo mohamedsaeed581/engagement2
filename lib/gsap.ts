@@ -23,6 +23,15 @@ export function useScrollReveal<T extends HTMLElement>(
     const el = ref.current;
     if (!el) return;
 
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion) {
+      gsap.set(el, { opacity: 1, y: 0 });
+      return;
+    }
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el,
@@ -35,8 +44,8 @@ export function useScrollReveal<T extends HTMLElement>(
           ease: "power3.out",
           scrollTrigger: {
             trigger: el,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
+            start: "top bottom",
+            toggleActions: "play none none none",
           },
         }
       );

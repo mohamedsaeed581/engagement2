@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCoverflow, Navigation, Pagination } from "swiper/modules";
@@ -17,12 +17,26 @@ import "swiper/css/pagination";
 
 export default function GallerySection() {
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const ref = useScrollReveal<HTMLDivElement>({ y: 40 });
+
+  useEffect(() => {
+    if (lightbox === null) return;
+
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightbox]);
 
   return (
     <SectionWrapper id="gallery" label="Gallery">
       <div ref={ref} className="mx-auto max-w-6xl text-center">
-        <h2 className="font-cinzel text-3xl text-gold md:text-5xl">
+        <h2 className="font-cinzel text-2xl text-gold sm:text-3xl md:text-5xl">
           Our Moments
         </h2>
         <GoldDivider />
@@ -33,6 +47,7 @@ export default function GallerySection() {
           grabCursor
           centeredSlides
           slidesPerView="auto"
+          spaceBetween={12}
           coverflowEffect={{
             rotate: 8,
             stretch: 0,
@@ -43,12 +58,18 @@ export default function GallerySection() {
           autoplay={{ delay: 3500, disableOnInteraction: false }}
           pagination={{ clickable: true }}
           navigation
-          className="gallery-swiper !pb-14 !pt-4"
+          breakpoints={{
+            768: {
+              spaceBetween: 24,
+            },
+          }}
+          className="gallery-swiper !pb-12 !pt-2 sm:!pb-14 sm:!pt-4"
         >
           {GALLERY_IMAGES.map((img, i) => (
-            <SwiperSlide key={i} className="!w-[280px] md:!w-[340px]">
+            <SwiperSlide key={i} className="!w-[220px] sm:!w-[280px] md:!w-[340px]">
               <button
                 onClick={() => setLightbox(i)}
+                aria-label={`View ${img.alt} enlarged`}
                 className="group relative block w-full overflow-hidden shadow-luxury transition-transform duration-500 hover:scale-[1.03]"
               >
                 <Image
@@ -56,7 +77,8 @@ export default function GallerySection() {
                   alt={img.alt}
                   width={340}
                   height={480}
-                  className="h-[360px] w-full object-cover md:h-[440px]"
+                  sizes="(max-width: 640px) 220px, (max-width: 768px) 280px, 340px"
+                  className="h-[300px] w-full object-cover sm:h-[360px] md:h-[440px]"
                 />
                 <div className="absolute inset-0 bg-gold/0 transition-colors group-hover:bg-gold/10" />
               </button>
@@ -68,14 +90,18 @@ export default function GallerySection() {
       <AnimatePresence>
         {lightbox !== null && (
           <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${GALLERY_IMAGES[lightbox].alt} photo`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 p-6"
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 p-4 sm:p-6"
             onClick={() => setLightbox(null)}
           >
             <button
-              className="absolute right-6 top-6 font-cinzel text-2xl text-gold"
+              ref={closeButtonRef}
+              className="absolute right-4 top-4 pt-safe font-cinzel text-2xl text-gold sm:right-6 sm:top-6"
               onClick={() => setLightbox(null)}
               aria-label="Close lightbox"
             >

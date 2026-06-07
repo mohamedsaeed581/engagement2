@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import OpeningScreen from "@/components/OpeningScreen";
 import HeroSection from "@/components/HeroSection";
@@ -9,7 +9,6 @@ import ChildhoodSection from "@/components/ChildhoodSection";
 import EventDetailsSection from "@/components/EventDetailsSection";
 import GallerySection from "@/components/GallerySection";
 import LocationSection from "@/components/LocationSection";
-import RSVPSection from "@/components/RSVPSection";
 import FooterSection from "@/components/FooterSection";
 import GoldParticles from "@/components/GoldParticles";
 import MusicControl from "@/components/MusicControl";
@@ -18,13 +17,27 @@ import { assetPath } from "@/lib/utils";
 export default function InvitationPage() {
   const [started, setStarted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [particleCount, setParticleCount] = useState(35);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    const updateParticles = () => {
+      setParticleCount(window.innerWidth < 768 ? 18 : 35);
+    };
+
+    updateParticles();
+    window.addEventListener("resize", updateParticles);
+    return () => window.removeEventListener("resize", updateParticles);
+  }, []);
 
   const playMusic = useCallback(() => {
     const audio = audioRef.current;
     if (!audio) return;
     audio.volume = 0.45;
-    audio.play().then(() => setIsPlaying(true)).catch(() => {});
+    audio
+      .play()
+      .then(() => setIsPlaying(true))
+      .catch(() => setIsPlaying(false));
   }, []);
 
   const handleContinue = () => {
@@ -45,7 +58,7 @@ export default function InvitationPage() {
 
   return (
     <>
-      <GoldParticles count={35} />
+      <GoldParticles count={particleCount} />
 
       <audio ref={audioRef} loop preload="auto">
         <source src={assetPath("/music/music.mp3")} type="audio/mpeg" />
@@ -57,16 +70,17 @@ export default function InvitationPage() {
 
       {started && <MusicControl isPlaying={isPlaying} onToggle={toggleMusic} />}
 
-      <main className="relative z-10">
-        <HeroSection />
-        <CountdownSection />
-        <ChildhoodSection />
-        <EventDetailsSection />
-        <GallerySection />
-        <LocationSection />
-        <RSVPSection />
-        <FooterSection />
-      </main>
+      {started && (
+        <main className="relative z-10">
+          <HeroSection />
+          <CountdownSection />
+          <ChildhoodSection />
+          <EventDetailsSection />
+          <GallerySection />
+          <LocationSection />
+          <FooterSection />
+        </main>
+      )}
     </>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { OPENING_QUOTE } from "@/lib/constants";
 import { GoldButton } from "./SectionWrapper";
 
 interface OpeningScreenProps {
@@ -10,6 +11,9 @@ interface OpeningScreenProps {
 export default function OpeningScreen({ onContinue }: OpeningScreenProps) {
   return (
     <motion.div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Welcome"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1.2, ease: "easeInOut" }}
@@ -25,20 +29,20 @@ export default function OpeningScreen({ onContinue }: OpeningScreenProps) {
           ✦ ✦ ✦
         </p>
 
-        <motion.h1
+        <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.6, delay: 0.3, ease: "easeOut" }}
-          className="font-cormorant text-3xl italic leading-relaxed text-gold-light md:text-5xl lg:text-6xl"
+          className="font-cormorant text-2xl italic leading-relaxed text-gold-light sm:text-3xl md:text-5xl lg:text-6xl"
         >
-          Every Love Story Has A Beginning...
-        </motion.h1>
+          {OPENING_QUOTE}
+        </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.2 }}
-          className="mt-16"
+          className="mt-10 sm:mt-16"
         >
           <GoldButton onClick={onContinue}>Continue</GoldButton>
         </motion.div>

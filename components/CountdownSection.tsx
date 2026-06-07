@@ -44,19 +44,19 @@ export default function CountdownSection() {
   return (
     <SectionWrapper id="countdown" label="Save the date" className="bg-gradient-to-b from-transparent via-gold/[0.03] to-transparent">
       <div ref={ref} className="mx-auto max-w-4xl text-center">
-        <h2 className="font-cinzel text-3xl text-gold md:text-5xl">
+        <h2 className="font-cinzel text-2xl text-gold sm:text-3xl md:text-5xl">
           Counting Down To Our Special Day
         </h2>
         <GoldDivider />
 
-        <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+        <div className="mx-auto grid max-w-sm grid-cols-2 gap-4 sm:max-w-none sm:gap-6 md:flex md:flex-wrap md:justify-center md:gap-8">
           {UNITS.map(({ key, label }) => (
             <div
               key={key}
-              className="group relative flex h-36 w-36 flex-col items-center justify-center rounded-full border border-gold/25 bg-white/[0.03] backdrop-blur-md transition-all hover:border-gold/60 hover:shadow-gold md:h-40 md:w-40"
+              className="group relative mx-auto flex aspect-square w-full max-w-[9.5rem] flex-col items-center justify-center rounded-full border border-gold/25 bg-white/[0.03] backdrop-blur-md transition-all hover:border-gold/60 hover:shadow-gold sm:max-w-[10.5rem] md:h-40 md:w-40 md:max-w-none"
             >
-              <div className="absolute inset-3 rounded-full border border-gold/10" />
-              <span className="font-cinzel text-4xl font-semibold text-gold md:text-5xl">
+              <div className="absolute inset-2 rounded-full border border-gold/10 sm:inset-3" />
+              <span className="font-cinzel text-3xl font-semibold text-gold sm:text-4xl md:text-5xl">
                 {key === "days" ? time[key] : formatCountdown(time[key])}
               </span>
               <span className="mt-2 font-montserrat text-[10px] uppercase tracking-[0.25em] text-white/40">

@@ -6,7 +6,7 @@ export const COUPLE = {
 
 export const EVENT = {
   date: "July 17, 2026",
-  dateISO: "2026-07-17T19:00:00",
+  dateISO: "2026-07-17T19:00:00+03:00",
   time: "7:00 PM",
   venue: "Green Plaza",
   venueAddress: "Green Plaza",
@@ -16,10 +16,16 @@ export const EVENT = {
   mapsLink: "https://www.google.com/maps/search/?api=1&query=Green+Plaza",
 } as const;
 
+export const CHILDHOOD_IMAGES = [
+  { src: "/images/childhood.jpg", alt: "Childhood memories" },
+  { src: "/images/childhood2.jpg", alt: "Childhood memories" },
+] as const;
+
 export const GALLERY_IMAGES = [
   { src: "/images/mohamed.jpg", alt: "Mohamed" },
   { src: "/images/rewan.jpg", alt: "Rewan" },
   { src: "/images/childhood.jpg", alt: "Childhood memories" },
+  { src: "/images/childhood2.jpg", alt: "Childhood memories" },
   { src: "/images/mohamed.jpg", alt: "Mohamed portrait" },
   { src: "/images/rewan.jpg", alt: "Rewan portrait" },
 ] as const;

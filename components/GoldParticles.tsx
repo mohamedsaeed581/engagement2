@@ -26,6 +26,7 @@ export default function GoldParticles({ count = 40 }: { count?: number }) {
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      init();
     };
 
     const init = () => {

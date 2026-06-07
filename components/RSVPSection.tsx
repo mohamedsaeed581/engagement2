@@ -23,6 +23,11 @@ export default function RSVPSection() {
       return;
     }
 
+    if (attendance === "yes" && guests < 1) {
+      setError("Please enter at least 1 guest.");
+      return;
+    }
+
     setLoading(true);
     setError("");
 
@@ -49,7 +54,7 @@ export default function RSVPSection() {
   return (
     <SectionWrapper id="rsvp" label="RSVP">
       <div ref={ref} className="mx-auto max-w-lg text-center">
-        <h2 className="font-cinzel text-3xl text-gold md:text-5xl">
+        <h2 className="font-cinzel text-2xl text-gold sm:text-3xl md:text-5xl">
           Will You Join Us?
         </h2>
         <GoldDivider />
@@ -91,30 +96,38 @@ export default function RSVPSection() {
               className="space-y-6 text-left"
             >
               <div>
-                <label className="mb-2 block font-montserrat text-[10px] uppercase tracking-[0.25em] text-white/40">
+                <label
+                  htmlFor="rsvp-name"
+                  className="mb-2 block font-montserrat text-[10px] uppercase tracking-[0.25em] text-white/40"
+                >
                   Your Name
                 </label>
                 <input
+                  id="rsvp-name"
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Enter your full name"
-                  className="w-full border border-gold/20 bg-luxury-card px-5 py-4 font-cormorant text-lg text-white outline-none transition-colors focus:border-gold/60"
+                  className="w-full border border-gold/20 bg-luxury-card px-4 py-3.5 font-cormorant text-base text-white outline-none transition-colors focus:border-gold/60 sm:px-5 sm:py-4 sm:text-lg"
                   required
                 />
               </div>
 
-              <div>
-                <label className="mb-3 block font-montserrat text-[10px] uppercase tracking-[0.25em] text-white/40">
+              <div role="group" aria-labelledby="rsvp-attendance-label">
+                <span
+                  id="rsvp-attendance-label"
+                  className="mb-3 block font-montserrat text-[10px] uppercase tracking-[0.25em] text-white/40"
+                >
                   Will you attend?
-                </label>
-                <div className="flex gap-4">
+                </span>
+                <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
                   {(["yes", "no"] as const).map((val) => (
                     <button
                       key={val}
                       type="button"
+                      aria-pressed={attendance === val}
                       onClick={() => setAttendance(val)}
-                      className={`flex-1 border py-3 font-montserrat text-xs uppercase tracking-widest transition-all ${
+                      className={`flex-1 border px-3 py-3 font-montserrat text-[10px] uppercase tracking-[0.15em] transition-all sm:text-xs sm:tracking-widest ${
                         attendance === val
                           ? "border-gold bg-gold/10 text-gold"
                           : "border-gold/20 text-white/50 hover:border-gold/40"
@@ -128,30 +141,40 @@ export default function RSVPSection() {
 
               {attendance === "yes" && (
                 <div>
-                  <label className="mb-2 block font-montserrat text-[10px] uppercase tracking-[0.25em] text-white/40">
+                  <label
+                    htmlFor="rsvp-guests"
+                    className="mb-2 block font-montserrat text-[10px] uppercase tracking-[0.25em] text-white/40"
+                  >
                     Number of Guests
                   </label>
                   <input
+                    id="rsvp-guests"
                     type="number"
                     min={1}
                     max={10}
                     value={guests}
-                    onChange={(e) => setGuests(Number(e.target.value))}
-                    className="w-full border border-gold/20 bg-luxury-card px-5 py-4 font-cormorant text-lg text-white outline-none focus:border-gold/60"
+                    onChange={(e) =>
+                      setGuests(Math.max(1, Number(e.target.value) || 1))
+                    }
+                    className="w-full border border-gold/20 bg-luxury-card px-4 py-3.5 font-cormorant text-base text-white outline-none focus:border-gold/60 sm:px-5 sm:py-4 sm:text-lg"
                   />
                 </div>
               )}
 
               <div>
-                <label className="mb-2 block font-montserrat text-[10px] uppercase tracking-[0.25em] text-white/40">
+                <label
+                  htmlFor="rsvp-message"
+                  className="mb-2 block font-montserrat text-[10px] uppercase tracking-[0.25em] text-white/40"
+                >
                   Message (Optional)
                 </label>
                 <textarea
+                  id="rsvp-message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   rows={3}
                   placeholder="Share your wishes..."
-                  className="w-full resize-none border border-gold/20 bg-luxury-card px-5 py-4 font-cormorant text-lg text-white outline-none focus:border-gold/60"
+                  className="w-full resize-none border border-gold/20 bg-luxury-card px-4 py-3.5 font-cormorant text-base text-white outline-none focus:border-gold/60 sm:px-5 sm:py-4 sm:text-lg"
                 />
               </div>
 

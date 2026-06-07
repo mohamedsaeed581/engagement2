@@ -5,11 +5,15 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
     @apply bg-luxury-black text-white antialiased;
     background-color: #050505;
+    overflow-x: hidden;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 
   ::selection {
@@ -49,11 +53,38 @@
   .gallery-swiper .swiper-button-prev {
     @apply text-gold;
   }
+
+  @media (max-width: 767px) {
+    .photo-frame::before {
+      @apply -inset-1;
+    }
+
+    .photo-frame::after {
+      @apply -inset-2;
+    }
+
+    .polaroid {
+      transform: rotate(-1deg);
+    }
+
+    .gallery-swiper .swiper-button-next,
+    .gallery-swiper .swiper-button-prev {
+      display: none;
+    }
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }
 
