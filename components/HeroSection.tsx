@@ -37,13 +37,6 @@ export default function HeroSection() {
           <br />
           their engagement
         </p>
-
-        <a
-          href="#countdown"
-          className="mt-8 inline-block w-full max-w-xs border border-gold px-8 py-3 font-montserrat text-[10px] uppercase tracking-[0.25em] text-gold transition-all hover:bg-gold hover:text-luxury-black hover:shadow-gold sm:mt-10 sm:w-auto sm:px-10 sm:py-3.5 sm:text-[11px] sm:tracking-[0.3em]"
-        >
-          Discover More
-        </a>
       </motion.div>
 
       <div className="order-2 flex justify-center gap-3 sm:gap-4 md:contents">
