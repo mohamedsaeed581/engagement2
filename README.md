@@ -4,7 +4,7 @@ Premium black & gold engagement invitation built with **Next.js 15**, **TypeScri
 
 ## Live Demo
 
-- **GitHub Pages:** https://mohamedsaeed581.github.io/engagement/
+- **GitHub Pages:** https://mohamedsaeed581.github.io/engagement2/
 - **Vercel:** Deploy your own instance (see below)
 
 ## Tech Stack
@@ -95,7 +95,7 @@ npm run build    # Production build (exports to /out)
 npm run build:gh-pages
 ```
 
-This builds with `basePath: /engagement` for `username.github.io/engagement/`.
+This builds with `basePath: /engagement2` for `username.github.io/engagement2/`.
 
 Then push the `out/` folder contents:
 

@@ -11,8 +11,8 @@ const nextConfig: NextConfig = {
     unoptimized: isGhPages,
   },
   ...(isGhPages && {
-    basePath: "/engagement",
-    assetPrefix: "/engagement/",
+    basePath: "/engagement2",
+    assetPrefix: "/engagement2/",
   }),
 };
 

@@ -4,12 +4,12 @@
 Set-Location $PSScriptRoot
 
 Write-Host "`n=== Engagement Site Deploy ===" -ForegroundColor Cyan
-Write-Host "Repo: https://github.com/mohamedsaeed581/engagement`n"
+Write-Host "Repo: https://github.com/mohamedsaeed581/engagement2`n"
 
 if (-not (Test-Path ".git")) {
     git init
     git branch -M main
-    git remote add origin https://github.com/mohamedsaeed581/engagement.git
+    git remote add origin https://github.com/mohamedsaeed581/engagement2.git
 }
 
 git add .
@@ -24,12 +24,12 @@ git push -u origin main
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "`nSUCCESS! Enable GitHub Pages:" -ForegroundColor Green
-    Write-Host "1. Open: https://github.com/mohamedsaeed581/engagement/settings/pages"
+    Write-Host "1. Open: https://github.com/mohamedsaeed581/engagement2/settings/pages"
     Write-Host "2. Source: Deploy from a branch"
     Write-Host "3. Branch: main  |  Folder: / (root)"
     Write-Host "4. Click Save`n"
     Write-Host "Your live site (wait 1-2 min):" -ForegroundColor Cyan
-    Write-Host "https://mohamedsaeed581.github.io/engagement/`n"
+    Write-Host "https://mohamedsaeed581.github.io/engagement2/`n"
 } else {
     Write-Host "`nPush failed. Create a token at:" -ForegroundColor Red
     Write-Host "https://github.com/settings/tokens (check 'repo' scope)"
